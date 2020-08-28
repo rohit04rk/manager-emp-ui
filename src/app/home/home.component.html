@@ -1,3 +1,51 @@
-<p>
-  home works!
-</p>
+<div class="container">
+
+  <mat-card class="mt-5 text-center">
+    <div class="text-right">
+      <button mat-stroked-button color="primary" (click)="addEmployee()">+ Add Employee</button>
+    </div>
+
+    <h4>List of Employees</h4>
+
+    <table class="table table-responsive table-striped">
+      <div *ngIf="employees?.length > 0;else noRecords">
+        <thead class="thead-dark">
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Mobile</th>
+            <th>Birth Date</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let emp of employees;let i=index">
+          <tr>
+            <td>{{emp.firstName}}</td>
+            <td>{{emp.lastName}}</td>
+            <td>{{emp.mobile}}</td>
+            <td>{{emp.dateOfBirth | date}}</td>
+            <td class="address-column">{{emp.address}}</td>
+            <td>{{emp.city}}</td>
+            <td>
+              <button mat-stroked-button color="primary" (click)="updateEmployee(emp.employeeUuid,i)">Update</button>
+            </td>
+            <td>
+              <button mat-stroked-button color="warn" (click)="deleteEmployee(emp.employeeUuid,i)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </div>
+      <ng-template #noRecords>
+
+        <div class="m-5">
+          <h6>No employee records found</h6>
+        </div>
+
+      </ng-template>
+    </table>
+  </mat-card>
+
+</div>

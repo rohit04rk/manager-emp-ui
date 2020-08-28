@@ -13,7 +13,6 @@ export class SignupComponent implements OnInit {
 
   signUpForm: FormGroup
 
-  mobileRegex: string = "^[6-9]\\d{9}$";
   nameRegex: string = "^[a-zA-Z ]+$";
   emailRegex: string = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -45,7 +44,7 @@ export class SignupComponent implements OnInit {
 
       this.managerService.signup(this.signUpForm.value).subscribe(
         res => {
-          if (res.code == 200) {
+          if (res.code == 201) {
             this.openSnackBar("Manager added successfully")
             this.router.navigateByUrl('/login')
           } else if (res.error) {

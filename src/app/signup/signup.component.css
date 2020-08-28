@@ -6,10 +6,3 @@ mat-form-field{
     margin: 0 auto;
     margin-top: 50px; 
 }
-.submit-btn {
-    color: #ffffff;
-    background-color: #2654a6;
-    border-radius: 2px;
-    width: 50%;
-    padding: 4px;
-}

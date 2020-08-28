@@ -2,11 +2,10 @@ export class CommonFields {
     firstName: string
     lastName: string
     dateOfBirth: Date
-    company: string
     address: string
 }
 
-export class Credential{
+export class Credential {
     email: string
     password: string
 }
@@ -26,4 +25,9 @@ export interface ValidatioErrorResponse {
 
 export interface AuthToken {
     token: string
+}
+
+export class DialogData {
+    employeeUuid: string
+    action: string
 }

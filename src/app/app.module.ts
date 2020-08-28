@@ -20,6 +20,8 @@ import {
 } from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GlobalInterceptor } from './http.interceptor';
+import { AddUpdateEmployeeComponent } from './add-update-employee/add-update-employee.component';
+import { ConfirmPopupComponent } from './confirm-popup/confirm-popup.component';
 
 
 export const MATERIAL_MODULES = [
@@ -45,7 +47,9 @@ export function tokenGetter() {
     LoginComponent,
     NavbarComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    AddUpdateEmployeeComponent,
+    ConfirmPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +68,10 @@ export function tokenGetter() {
       useClass: GlobalInterceptor,
       multi: true
     }
+  ],
+  entryComponents:[
+    AddUpdateEmployeeComponent,
+    ConfirmPopupComponent
   ],
   bootstrap: [AppComponent]
 })

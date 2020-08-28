@@ -11,7 +11,7 @@ export const environment = {
 
   LOGIN: BASE_URL + 'login',
 
-  EMPLOYEES: BASE_URL + 'employees',
+  EMPLOYEES: BASE_URL + 'employees/',
 
 };
 
