@@ -1,0 +1,17 @@
+.navbar{
+    height: 55px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 5px 0 rgba(0, 0, 0, 0.19);
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+a{
+    color: #4b4b4b;
+    text-decoration: none;
+}
+a:hover{
+    color: #2654a6;
+    text-decoration: none;
+}
+li.active{
+    color: #2654a6;
+}
