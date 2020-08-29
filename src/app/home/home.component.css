@@ -2,3 +2,8 @@
     word-break: break-word;
     white-space: pre-wrap;
 }
+table{
+    width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+}

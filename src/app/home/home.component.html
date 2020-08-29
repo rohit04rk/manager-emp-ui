@@ -1,13 +1,13 @@
 <div class="container">
 
-  <mat-card class="mt-5 text-center">
+  <mat-card class="mt-5">
     <div class="text-right">
       <button mat-stroked-button color="primary" (click)="addEmployee()">+ Add Employee</button>
     </div>
 
-    <h4>List of Employees</h4>
+    <h4 class="text-center">List of Employees</h4>
 
-    <table class="table table-responsive table-striped">
+    <table class="table table-responsive table-bordered">
       <div *ngIf="employees?.length > 0;else noRecords">
         <thead class="thead-dark">
           <tr>
@@ -40,11 +40,15 @@
       </div>
       <ng-template #noRecords>
 
-        <div class="m-5">
+        <div class="m-5 text-center">
           <h6>No employee records found</h6>
         </div>
 
       </ng-template>
+
+      <div *ngIf="showSpinner">
+        <mat-spinner strokeWidth="5" [diameter]="50" style="margin: 0 auto;"></mat-spinner>
+      </div>
     </table>
   </mat-card>
 

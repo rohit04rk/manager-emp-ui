@@ -4,10 +4,7 @@
   </button>
 </div>
 
-<h5 *ngIf="data.action == 'ADD';else updateEmp">Add Employee</h5>
-<ng-template #updateEmp>
-  <h5>Update Employee</h5>
-</ng-template>
+<h5>{{data.action == 'ADD' ? 'Add' : 'Update'}} Employee</h5>
 
 <div class="text-center">
   <form [formGroup]="employeeForm">
@@ -93,15 +90,21 @@
       </mat-form-field>
     </div>
 
-    <div class="mt-3" *ngIf="data.action == 'ADD';else update">
-      <button mat-raised-button class="submit-btn" (click)="submit()">Submit</button>
+    <div class="mt-3" *ngIf="data.action == 'ADD';else updateBtn">
+      <button *ngIf="showBtn" mat-raised-button class="submit-btn" (click)="submit()">Submit</button>
     </div>
 
-    <ng-template #update>
-      <div class="mt-3">
+    <ng-template #updateBtn>
+      <div class="mt-3" *ngIf="showBtn">
         <button mat-raised-button class="submit-btn" (click)="update()">Update</button>
       </div>
     </ng-template>
+
+    <div *ngIf="showSpinner">
+      <button mat-raised-button disabled>
+        <mat-spinner strokeWidth="3" [diameter]="30" style="margin: 0 auto;"></mat-spinner> saving please wait...
+      </button>
+    </div>
 
   </form>
 </div>

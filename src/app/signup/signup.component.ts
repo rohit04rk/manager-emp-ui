@@ -20,6 +20,9 @@ export class SignupComponent implements OnInit {
 
   maxDate: Date = new Date()
 
+  showBtn: boolean = true
+  showSpinner: boolean
+
   constructor(private formBuilder: FormBuilder, private managerService: ManagerService,
     private snackBar: MatSnackBar, private router: Router) { }
 
@@ -41,14 +44,18 @@ export class SignupComponent implements OnInit {
 
   submit() {
     if (this.signUpForm.valid) {
-
+      this.showBtn = false
+      this.showSpinner = true
       this.managerService.signup(this.signUpForm.value).subscribe(
         res => {
           if (res.code == 201) {
             this.openSnackBar("Manager added successfully")
             this.router.navigateByUrl('/login')
           } else if (res.error) {
+            this.showBtn = true
+            this.showSpinner = false
             if (res.code == 110) {
+              this.openSnackBar("Email id already exist")
               this.signUpForm.controls['email'].setErrors({
                 "alreadyExists": true
               })

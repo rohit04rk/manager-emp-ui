@@ -15,8 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   MatIconModule, MatCardModule, MatDatepickerModule,
-  MatProgressBarModule, MatSnackBarModule, MatDialogModule,
-  MatInputModule, MatButtonModule, MatNativeDateModule
+  MatSnackBarModule, MatDialogModule,
+  MatInputModule, MatButtonModule, MatNativeDateModule, MatProgressSpinnerModule
 } from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GlobalInterceptor } from './http.interceptor';
@@ -28,12 +28,12 @@ export const MATERIAL_MODULES = [
   MatIconModule, 
   MatCardModule, 
   MatDatepickerModule,
-  MatProgressBarModule, 
   MatSnackBarModule, 
   MatDialogModule,
   MatInputModule, 
   MatButtonModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatProgressSpinnerModule
 ]
 
 export function tokenGetter() {

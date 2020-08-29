@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef, MatDialogConfig, MatDialog } from '@angular/material';
 import { DialogData } from '@models/common';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeService } from '@services/employee.service';
+import { ConfirmPopupComponent } from 'app/confirm-popup/confirm-popup.component';
 
 @Component({
   selector: 'app-add-update-employee',
@@ -19,10 +20,13 @@ export class AddUpdateEmployeeComponent implements OnInit {
 
   maxDate: Date = new Date()
 
+  showBtn: boolean = true
+  showSpinner: boolean
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<AddUpdateEmployeeComponent>,
     private formBuilder: FormBuilder, private employeeService: EmployeeService,
-    private snackBar: MatSnackBar, private router: Router) { }
+    private snackBar: MatSnackBar, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -45,14 +49,18 @@ export class AddUpdateEmployeeComponent implements OnInit {
 
   submit() {
     if (this.employeeForm.valid) {
-
+      this.showSpinner = true
+      this.showBtn = false
       this.employeeService.addEmployee(this.employeeForm.value).subscribe(
         res => {
           if (res.code == 201) {
             this.openSnackBar("Employee added successfully")
             this.dialogRef.close(res.data)
           } else if (res.error) {
+            this.showSpinner = false
+            this.showBtn = true
             if (res.code == 110) {
+              this.openSnackBar("Mobile number already exist")
               this.employeeForm.controls['mobile'].setErrors({
                 "alreadyExists": true
               })
@@ -60,6 +68,44 @@ export class AddUpdateEmployeeComponent implements OnInit {
           }
         }
       )
+    }
+  }
+
+  update() {
+    if (this.employeeForm.valid) {
+
+      let dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = false
+      dialogConfig.width = '400px'
+      dialogConfig.height = '250px'
+
+      const dialogRef = this.dialog.open(ConfirmPopupComponent, dialogConfig);
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.showSpinner = true
+          this.showBtn = false
+          this.employeeService.updateEmployee(this.employeeForm.value, this.data.employeeUuid).subscribe(
+            res => {
+              if (res.code == 200) {
+                this.openSnackBar("Employee updated successfully")
+                this.dialogRef.close(res.data)
+              } else if (res.error) {
+                this.showSpinner = false
+                this.showBtn = true
+                if (res.code == 110) {
+                  this.openSnackBar("Mobile number already exist")
+                  this.employeeForm.controls['mobile'].setErrors({
+                    "alreadyExists": true
+                  })
+                }
+              }
+            }
+          )
+        }
+      });
+
+
     }
   }
 
